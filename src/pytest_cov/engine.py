@@ -15,7 +15,7 @@ from .compat import workeroutput
 from .embed import cleanup
 
 
-class _NullFile(object):
+class _NullFile:
     @staticmethod
     def write(v):
         pass
@@ -31,7 +31,7 @@ def _backup(obj, attr):
         setattr(obj, attr, backup)
 
 
-class CovController(object):
+class CovController:
     """Base class for different plugin implementations."""
 
     def __init__(self, cov_source, cov_report, cov_config, cov_append, cov_branch, config=None, nodeid=None):

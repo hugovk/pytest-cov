@@ -119,7 +119,7 @@ def pytest_load_initial_conftests(early_config, parser, args):
         early_config.pluginmanager.register(plugin, '_cov')
 
 
-class CovPlugin(object):
+class CovPlugin:
     """Use coverage package to produce code coverage reports.
 
     Delegates all work to a particular implementation based on whether
@@ -173,7 +173,7 @@ class CovPlugin(object):
 
         if config is None:
             # fake config option for engine
-            class Config(object):
+            class Config:
                 option = self.options
 
             config = Config()
@@ -336,7 +336,7 @@ class CovPlugin(object):
             yield
 
 
-class TestContextPlugin(object):
+class TestContextPlugin:
     def __init__(self, cov):
         self.cov = cov
 

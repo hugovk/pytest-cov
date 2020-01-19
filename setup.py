@@ -1,9 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-from __future__ import absolute_import
-from __future__ import print_function
 
-import io
 import re
 from distutils.command.build import build
 from glob import glob
@@ -22,7 +18,7 @@ from setuptools.command.install_lib import install_lib
 
 
 def read(*names, **kwargs):
-    return io.open(
+    return open(
         join(dirname(__file__), *names),
         encoding=kwargs.get('encoding', 'utf8')
     ).read()
