@@ -6,22 +6,16 @@ env:
   global:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
     - SEGFAULT_SIGNALS=all
-stages:
-  - lint
-  - examples
-  - tests
 matrix:
   fast_finish: true
   allow_failures:
   - python: '3.8'
 jobs:
   include:
-    - stage: lint
-      env: TOXENV=check
+    - env: TOXENV=check
     - env: TOXENV=docs
 
-    - stage: tests
-      env: TOXENV=py35-pytest46-xdist27-coverage45
+    - env: TOXENV=py35-pytest46-xdist27-coverage45
       python: '3.5'
     - env: TOXENV=py35-pytest46-xdist27-coverage50
       python: '3.5'
@@ -102,8 +96,7 @@ jobs:
     - env: TOXENV=pypy3-pytest53-xdist31-coverage50
       python: 'pypy3'
 
-    - stage: examples
-      python: '3.8'
+    - python: '3.8'
       script: cd $TARGET; tox -v
       env:
           - TARGET=examples/src-layout
