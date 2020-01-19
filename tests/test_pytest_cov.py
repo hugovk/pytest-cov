@@ -1014,7 +1014,6 @@ def test_funcarg_not_active(testdir):
     assert result.ret == 0
 
 
-@pytest.mark.skipif("sys.version_info[0] < 3", reason="no context manager api on Python 2")
 @pytest.mark.skipif('sys.platform == "win32"', reason="multiprocessing support is broken on Windows")
 @pytest.mark.skipif('platform.python_implementation() == "PyPy"', reason="often deadlocks on PyPy")
 @pytest.mark.skipif('sys.version_info[:2] == (3, 8)', reason="deadlocks on Python 3.8, see: https://bugs.python.org/issue38227")
@@ -1101,7 +1100,7 @@ def test_run_target():
 
 
 @pytest.mark.skipif('sys.platform == "win32"', reason="multiprocessing support is broken on Windows")
-@pytest.mark.skipif('sys.version_info[0] > 2 and platform.python_implementation() == "PyPy"', reason="broken on PyPy3")
+@pytest.mark.skipif('platform.python_implementation() == "PyPy"', reason="broken on PyPy3")
 def test_multiprocessing_pool_close(testdir):
     pytest.importorskip('multiprocessing.util')
 
@@ -1425,8 +1424,7 @@ def test_run():
     stdout, stderr = proc.communicate()
     assert not stderr
     assert stdout == b""
-    # it appears signal handling is buggy on python 2?
-    if sys.version_info == 3: assert proc.returncode in [128 + signal.SIGTERM, -signal.SIGTERM]
+    assert proc.returncode in [128 + signal.SIGTERM, -signal.SIGTERM]
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -1710,7 +1708,7 @@ def test_dist_boxed(testdir):
 
 
 @pytest.mark.skipif('sys.platform == "win32"')
-@pytest.mark.skipif('sys.version_info[0] > 2 and platform.python_implementation() == "PyPy"',
+@pytest.mark.skipif('platform.python_implementation() == "PyPy"',
                     reason="strange optimization on PyPy3")
 def test_dist_bare_cov(testdir):
     script = testdir.makepyfile(SCRIPT_SIMPLE)
