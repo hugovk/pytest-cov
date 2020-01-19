@@ -21,11 +21,7 @@ jobs:
     - env: TOXENV=docs
 
     - stage: tests
-      env: TOXENV=py27-pytest46-xdist27-coverage45
-      python: '2.7'
-    - env: TOXENV=py27-pytest46-xdist27-coverage50
-      python: '2.7'
-    - env: TOXENV=py35-pytest46-xdist27-coverage45
+      env: TOXENV=py35-pytest46-xdist27-coverage45
       python: '3.5'
     - env: TOXENV=py35-pytest46-xdist27-coverage50
       python: '3.5'
@@ -37,10 +33,6 @@ jobs:
       python: '3.7'
     - env: TOXENV=py37-pytest46-xdist27-coverage50
       python: '3.7'
-    - env: TOXENV=pypy-pytest46-xdist27-coverage45
-      python: 'pypy'
-    - env: TOXENV=pypy-pytest46-xdist27-coverage50
-      python: 'pypy'
     - env: TOXENV=pypy3-pytest46-xdist27-coverage45
       python: 'pypy3'
     - env: TOXENV=pypy3-pytest46-xdist27-coverage50

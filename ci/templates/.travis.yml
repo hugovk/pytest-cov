@@ -23,9 +23,7 @@ jobs:
 {% for env in tox_environments %}
     {%+ if not loop.first %}- {% else %}  {% endif -%}
       env: TOXENV={{ env }}
-    {% if env.startswith("pypy-") %}
-      python: 'pypy'
-    {% elif env.startswith("pypy3-") %}
+    {% if env.startswith("pypy3-") %}
       python: 'pypy3'
     {% else %}
       python: '{{ "{0[2]}.{0[3]}".format(env) }}'
