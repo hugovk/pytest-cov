@@ -1,0 +1,37 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+  schedule:
+    # At 00:00 on Sunday, https://crontab.guru/weekly
+    - cron:  '0 0 * * 0'
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -U pip
+          python -m pip install -r ci/requirements.txt
+          python -m pip install -U pytest --pre
+          python -m pip install .
+
+      - name: Tests
+        shell: bash
+        run: |
+          pytest
